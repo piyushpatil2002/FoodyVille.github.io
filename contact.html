@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>.button {
-    text-align: center;
-}</style>
+	<link rel="stylesheet" href="css/style2.css">
+<style>
+
+.button {
+	text-align: center;
+} 
+</style>
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href=
 	"https://maxcdn.bootstrapcdn.com/bootstrap/
@@ -26,7 +31,6 @@
 </head>
 
 <body>
-
 <br>
 	<h1 class="text-center text-success">
 		Contact Us
@@ -38,7 +42,7 @@
 	<div class="container">
 	<div class="col-lg-8
 		m-auto d-block">
-		<form>
+		<form name="submit-to-google-sheet">
 		<div class="form-group">
 			<label for ="user">
 				Name:
@@ -93,8 +97,20 @@
 			value="Submit" class="btn btn-primary">
 		
         </form>
+		<span id="msg">Hello</span>
 	</div>
 	</div>
     <script src="contact.js"></script>
+	<script>
+		const scriptURL = 'https://script.google.com/macros/s/AKfycbxQEP62Uw_lX6RCzAC2nynOizO_fMZldIBcl2Aj8snufHdT_7CQmO4CdsdJ-4ZK-5eC/exec'
+		const form = document.forms['submit-to-google-sheet']
+	  
+		form.addEventListener('submit', e => {
+		  e.preventDefault()
+		  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+			.then(response => console.log('Success!', response))
+			.catch(error => console.error('Error!', error.message))
+		})
+	  </script>
 </body>
 </html>
